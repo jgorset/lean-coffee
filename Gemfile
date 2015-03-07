@@ -28,6 +28,9 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+# This gem makes lodash available for the Rails asset pipeline
+gem 'lodash-rails'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -45,6 +48,12 @@ gem 'slim'
 
 # Bourbon Sass Mixins using SCSS syntax.
 gem 'bourbon'
+
+# Angular.
+gem 'angularjs-rails'
+
+# Summary: Use ngannotate in the Rails asset pipeline.
+gem 'ngannotate-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

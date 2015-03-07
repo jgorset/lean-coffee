@@ -1,26 +1,25 @@
-div class="lanes"
+div ng-controller="TopicsCtrl as topicsCtrl" class="lanes"
 
   div class="to-talk-about lane"
     h1 To talk about
 
     ul class="topics"
-      li class="topic"
-        p Going for burgers
-      li class="topic"
-        p Full Stack Fest
+      li ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'to-talk-about' }" class="topic"
+        p ng-bind="topic.title"
 
-    input class="new-topic" type="text" placeholder="Add a topic"
+    form ng-submit="topicsCtrl.create()"
+      input ng-model="title" class="new-topic" type="text" placeholder="Add a topic"
 
   div class="talking-about lane"
     h1 Talking about
 
     ul class="topics"
-      li class="topic"
-        p Involve everyone in everything
+      li ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'talking-about' }" class="topic"
+        p ng-bind="topic.title"
 
   div class="talked-about lane"
     h1 Talked about
 
     ul class="topics"
-      li class="topic"
-        p Johannes is awesome
+      li ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'talked-about' }" class="topic"
+        p ng-bind="topic.title"
