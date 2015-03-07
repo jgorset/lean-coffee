@@ -56,4 +56,10 @@ group :development, :test do
 
   # Use Pry as your rails console
   gem 'pry-rails'
+
+  # Better error page for Rails and other Rack apps
+  gem 'better_errors'
+
+  # Retrieve the binding of a method's caller.
+  gem 'binding_of_caller'
 end
