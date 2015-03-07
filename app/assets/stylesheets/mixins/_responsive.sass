@@ -1,0 +1,37 @@
+// Define sizes
+$tablet-width: 768px
+$desktop-width: 1024px
+
+// Screen sizes
+$mobile: "(max-width : #{$tablet-width - 1})"
+$mobile-portrait: "(max-width : #{$tablet-width - 1}) and (orientation : portrait)"
+$mobile-landscape: "(max-width : #{$tablet-width - 1}) and (orientation : landscape)"
+$tablet: "(min-width : #{$tablet-width}) and (max-width : #{$desktop-width})"
+$desktop: "(min-width : #{$desktop-width})"
+$non-mobile: "(min-width : #{$tablet-width})"
+$non-desktop: "(max-width : #{$desktop-width})"
+
+// Addons
+$landscape: " (orientation : landscape)"
+$portrait: " (orientation : portrait)"
+$retina: " (min-device-pixel-ratio: 2.0) or (-webkit-min-device-pixel-ratio: 2) or (min-resolution: 192dppx)"
+
+$media: "screen and "
+
+=respond-to($items)
+
+  $media-list: ""
+
+  @if length($items) == 1
+    $media-list: $items
+  @else
+    @each $item in $items
+      $unqoted_item: unquote($item)
+
+      @if index($items, $item) != length($items)
+        $media-list: $media-list + $unqoted_item + ", "
+      @else
+        $media-list: $media-list + $unqoted_item
+
+  @media #{$media}#{$media-list}
+    @content
