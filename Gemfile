@@ -43,6 +43,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Slim is a template language.
 gem 'slim'
 
+# Bourbon Sass Mixins using SCSS syntax.
+gem 'bourbon'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

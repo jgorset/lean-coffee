@@ -43,6 +43,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bourbon (3.2.1)
+      sass (~> 3.2)
+      thor
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -186,6 +189,7 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  bourbon
   byebug
   coffee-rails (~> 4.1.0)
   jbuilder (~> 2.0)

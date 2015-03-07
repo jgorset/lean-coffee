@@ -1,0 +1,46 @@
+// This is a manifest file that'll be compiled into application.css, which will include all the files
+// listed below.
+//
+// Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+// or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+//
+// You're free to add application-wide styles to this file and they'll appear at the bottom of the
+// compiled file so the styles you add here take precedence over styles defined in any styles
+// defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+// file per style scope.
+
+@import "bourbon"
+@import "topics"
+
+*
+  box-sizing: border-box
+
+body
+  background: #fff
+  color: #999
+  font-size: 14px
+  font-family: "proxima-nova"
+  -webkit-font-smoothing: antialiased
+
+h1
+  font-size: 1.5em
+  line-height: 150%
+  text-transform: uppercase
+  color: #000
+  margin: 0 0 1em 0
+
+p
+  font-size: 1em
+  line-height: 150%
+
+.wf-loading h1,
+.wf-loading h2,
+.wf-loading h3,
+.wf-loading p
+  visibility: hidden
+
+.wf-active h1,
+.wf-active h2,
+.wf-active h3,
+.wf-active p
+  visibility: visible
