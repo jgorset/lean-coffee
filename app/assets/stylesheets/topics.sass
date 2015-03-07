@@ -3,16 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .lanes
-  margin: 10vh
+  margin: 5vh
 
 .lane
-  border: 2px solid #eee
+  border: 2px dotted rgba(255, 255, 255, 0.2)
   padding: 1em
   float: left
   margin: 0 1.5%
   width: 30%
-  background: #fff
-  min-height: 80vh
+  min-height: 90vh
 
   h1
     text-align: center
@@ -23,7 +22,17 @@
     list-style: none
     
     .topic
-      background: rgba(245,125,45,0.9)
-      color: #fff
-      padding: 0.5em
-      margin-bottom: 0.5em
+      position: relative
+      background: rgba(255, 255, 255, 1)
+      color: rgba(245, 125, 45, 0.9)
+      font-size: 1.5em
+      padding: 0.75em
+      margin-bottom: 0.75em
+      font-family: "gooddog-new"
+      text-align: center
+      min-height: 4em
+
+      p
+        display: flex
+        justify-content: center
+        flex-direction: column
