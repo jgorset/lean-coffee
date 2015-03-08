@@ -84,3 +84,8 @@ group :development, :test do
   # Retrieve the binding of a method's caller.
   gem 'binding_of_caller'
 end
+
+group :production do
+  # Following best practices from http://12factor.
+  gem 'rails_12factor'
+end
