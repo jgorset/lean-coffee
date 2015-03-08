@@ -9,7 +9,7 @@ angular.module "lean-coffee"
       topic = new Topic(attributes)
       topic.$save()
         .then (topic) =>
-          @list.push topic
+          @list.unshift topic
 
     @voteFor = (topic) =>
       topic.votes += 1
