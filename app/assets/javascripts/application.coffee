@@ -11,11 +11,13 @@
 # about supported directives.
 #
 #= require jquery
+#= require jquery-ui
 #= require jquery_ujs
 #= require turbolinks
 #= require angular
 #= require angular-animate
 #= require angular-resource
+#= require angular-dragdrop
 #= require lodash
 #= require angular/config
 #= require_tree .

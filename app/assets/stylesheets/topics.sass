@@ -16,6 +16,10 @@
   margin: 0 1.5%
   width: 30%
   min-height: 90vh
+  +transition(border ease-in-out 0.1s)
+
+  &.hovering
+    border: 2px dotted rgba(255, 255, 255, 1.0)
 
   .sort
     position: absolute
@@ -75,14 +79,18 @@
       text-align: center
       min-height: 4em
       cursor: pointer
+      width: 100%
       +user-select(none)
+      +transition(transform ease-in-out 0.25s)
 
-      &:hover
-        +transition(transform ease-in-out 0.25s)
+      &:active
         +transform(scale(1.05))
 
       &.ng-enter
         +animation(bounce ease-in-out 0.25s)
+
+      &.ng-leave
+        display: none
 
       p
         display: flex

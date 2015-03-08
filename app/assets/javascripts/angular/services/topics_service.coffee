@@ -1,15 +1,33 @@
 angular.module "lean-coffee"
   .service "topicsService", ($resource, Topic) ->
-    @list = []
+    @to_talk_about = []
+    @talking_about = []
+    @talked_about  = []
 
     @load = =>
-      @list = Topic.query => @sort()
+      topics = Topic.query =>
+        @sort()
+
+        for topic in topics
+          switch topic.status
+            when "to_talk_about"
+              @to_talk_about.unshift topic
+            when "talking_about"
+              @talking_about.unshift topic
+            when "talked_about"
+              @talked_about.unshift topic
 
     @create = (attributes) =>
       topic = new Topic(attributes)
       topic.$save()
         .then (topic) =>
-          @list.unshift topic
+          switch topic.status
+            when "to_talk_about"
+              @to_talk_about.unshift topic
+            when "talking_about"
+              @talking_about.unshift topic
+            when "talked_about"
+              @talked_about.unshift topic
 
     @voteFor = (topic) =>
       topic.votes += 1
@@ -18,11 +36,13 @@ angular.module "lean-coffee"
     @destroy = (topic) =>
       topic.$delete()
 
-      index = _.indexOf(@list, topic)
-      @list.splice(index, 1)
+      for list in [@to_talk_about, @talking_about, @talked_about]
+        index = _.indexOf(list, topic)
+        list.splice(index, 1)
 
     @sort = =>
-      @list.sort (a, b) => b.votes - a.votes
+      for list in [@to_talk_about, @talking_about, @talked_about]
+        list.sort (a, b) => b.votes - a.votes
 
     @load()
 

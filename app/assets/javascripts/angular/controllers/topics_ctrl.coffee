@@ -3,9 +3,9 @@ angular.module "lean-coffee"
     @service = topicsService
 
     @create = =>
-      if $scope.title.length
-        topicsService.create title: $scope.title
-        $scope.title = ""
+      if @title.length
+        topicsService.create title: @title
+        @title = ""
 
     @times = (n) =>
       new Array(n)
