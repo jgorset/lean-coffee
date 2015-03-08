@@ -61,6 +61,9 @@ gem 'angularjs-rails'
 # Summary: Use ngannotate in the Rails asset pipeline.
 gem 'ngannotate-rails'
 
+# Pg is the Ruby interface to the {PostgreSQL RDBMS}[http://www.postgresql.org/]
+gem 'pg'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
