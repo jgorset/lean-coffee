@@ -34,6 +34,12 @@ gem 'lodash-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Enumerated attributes with I18n and ActiveRecord/Mongoid/MongoMapper support
+gem 'enumerize'
+
+# Font-Awesome SASS
+gem 'font-awesome-sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

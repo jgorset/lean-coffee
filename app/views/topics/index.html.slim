@@ -1,25 +1,29 @@
-div ng-controller="TopicsCtrl as topicsCtrl" class="lanes"
+div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
 
   div class="to-talk-about lane"
     h1 To talk about
 
+    i class="sort fa fa-sort-amount-desc" ng-click="topicsCtrl.service.sort()"
+
     ul class="topics"
-      li ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'to-talk-about' }" class="topic"
+      li ng-controller="TopicCtrl as topicCtrl" ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'to_talk_about' }" ng-click="topicCtrl.vote()" class="topic"
         p ng-bind="topic.title"
+        ul class="votes"
+          li class="vote" ng-repeat="vote in topicsCtrl.times(topic.votes) track by $index"
 
     form ng-submit="topicsCtrl.create()"
-      input ng-model="title" class="new-topic" type="text" placeholder="Add a topic"
+      input ng-model="title" class="new-topic" type="text"
 
   div class="talking-about lane"
     h1 Talking about
 
     ul class="topics"
-      li ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'talking-about' }" class="topic"
+      li ng-controller="TopicCtrl as topicCtrl" ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'talking_about' }" ng-click="topicCtrl.vote()" class="topic"
         p ng-bind="topic.title"
 
   div class="talked-about lane"
     h1 Talked about
 
     ul class="topics"
-      li ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'talked-about' }" class="topic"
+      li ng-controller="topicCtrl as topicCtrl" ng-repeat="topic in topicsCtrl.service.list | filter:{ status: 'talked_about' }" ng-click="topicCtrl.vote()" class="topic"
         p ng-bind="topic.title"

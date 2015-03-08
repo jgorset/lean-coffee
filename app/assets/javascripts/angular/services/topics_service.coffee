@@ -3,19 +3,26 @@ angular.module "lean-coffee"
     @list = []
 
     @load = =>
-      @list = Topic.query()
+      @list = Topic.query => @sort()
 
     @create = (attributes) =>
       topic = new Topic(attributes)
       topic.$save()
         .then (topic) =>
-          @list.unshift topic
+          @list.push topic
+
+    @voteFor = (topic) =>
+      topic.votes += 1
+      topic.$update()
 
     @destroy = (topic) =>
       topic.$delete()
 
       index = _.indexOf(@list, topic)
       @list.splice(index, 1)
+
+    @sort = =>
+      @list.sort (a, b) => b.votes - a.votes
 
     @load()
 

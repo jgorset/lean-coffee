@@ -64,8 +64,12 @@ GEM
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
+    enumerize (0.8.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.4.0)
+    font-awesome-sass (4.2.0)
+      sass (~> 3.2)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
     hike (1.2.3)
@@ -199,6 +203,8 @@ DEPENDENCIES
   bourbon
   byebug
   coffee-rails (~> 4.1.0)
+  enumerize
+  font-awesome-sass
   jbuilder (~> 2.0)
   jquery-rails
   lodash-rails
