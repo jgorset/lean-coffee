@@ -1,9 +1,13 @@
 angular.module "lean-coffee"
-  .controller "LaneCtrl", ($scope) ->
-    $scope.dragOver = (e) =>
+  .controller "LaneCtrl", ($scope, topicsService) ->
+
+    $scope.onOver = (e) =>
       angular.element(e.target).addClass('hovering')
 
-    $scope.dragOut = (e) =>
+    $scope.onOut = (e) =>
+      angular.element(e.target).removeClass('hovering')
+
+    $scope.onDrop = (e) =>
       angular.element(e.target).removeClass('hovering')
 
     this

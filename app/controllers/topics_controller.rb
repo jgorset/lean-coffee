@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
   def update
     @topic = Topic.find params[:id]
 
-    @topic.votes = params[:votes]
+    @topic.attributes = topic_params
 
     respond_to do |format|
       if @topic.save
@@ -41,6 +41,6 @@ class TopicsController < ApplicationController
   private
 
   def topic_params
-    params.require(:topic).permit(:title)
+    params.require(:topic).permit(:title, :status)
   end
 end

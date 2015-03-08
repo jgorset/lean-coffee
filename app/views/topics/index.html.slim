@@ -3,13 +3,13 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
   div[
     class="to-talk-about lane"
     ng-controller="LaneCtrl as laneCtrl"
-    ng-model="topicsCtrl.service.to_talk_about"
+    ng-model="service.to_talk_about"
     data-drop="true"
-    data-jqyoui-droppable="{multiple:true, onOver: 'dragOver', onOut: 'dragOut', onDrop: 'dragOut'}"
+    data-jqyoui-droppable="{multiple:true, onOver: 'onOver', onOut: 'onOut', onDrop: 'onDrop'}"
     ]
     h1 To talk about
 
-    i class="sort fa fa-sort-amount-desc" ng-click="topicsCtrl.service.sort()"
+    i class="sort fa fa-sort-amount-desc" ng-click="service.sort()"
 
     form ng-submit="topicsCtrl.create()"
       input ng-model="topicsCtrl.title" class="new-topic" type="text"
@@ -17,12 +17,12 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
     ul class="topics"
       li[
         ng-controller="TopicCtrl as topicCtrl"
-        ng-repeat="topic in topicsCtrl.service.to_talk_about"
+        ng-repeat="topic in service.to_talk_about"
         ng-click="topicCtrl.vote()"
         data-drag="true"
         data-jqyoui-options="{revert: 'invalid'}"
-        ng-model="topicsCtrl.service.to_talk_about"
-        data-jqyoui-draggable="{index: {{$index}}, animate: true}"
+        ng-model="service.to_talk_about"
+        data-jqyoui-draggable="{index: {{$index}}, animate: true, onStart: 'onStart', onStop: 'onStop'}"
         class="topic"
         ]
         p ng-bind="topic.title"
@@ -32,21 +32,21 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
   div[
     class="talking-about lane"
     ng-controller="LaneCtrl as laneCtrl"
-    ng-model="topicsCtrl.service.talking_about"
+    ng-model="service.talking_about"
     data-drop="true"
-    data-jqyoui-droppable="{multiple:true, onOver: 'dragOver', onOut: 'dragOut', onDrop: 'dragOut'}"
+    data-jqyoui-droppable="{multiple:true, onOver: 'onOver', onOut: 'onOut', onDrop: 'onDrop'}"
     ]
     h1 Talking about
 
     ul class="topics"
       li[
         ng-controller="TopicCtrl as topicCtrl"
-        ng-repeat="topic in topicsCtrl.service.talking_about"
+        ng-repeat="topic in service.talking_about"
         ng-click="topicCtrl.vote()"
         data-drag="true"
         data-jqyoui-options="{revert: 'invalid'}"
-        ng-model="topicsCtrl.service.talking_about"
-        data-jqyoui-draggable="{index: {{$index}}, animate: true}"
+        ng-model="service.talking_about"
+        data-jqyoui-draggable="{index: {{$index}}, animate: true, onStart: 'onStart', onStop: 'onStop'}"
         class="topic"
         ]
         p ng-bind="topic.title"
@@ -54,21 +54,21 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
   div[
     class="talked-about lane"
     ng-controller="LaneCtrl as laneCtrl"
-    ng-model="topicsCtrl.service.talked_about"
+    ng-model="service.talked_about"
     data-drop="true"
-    data-jqyoui-droppable="{multiple:true, onOver: 'dragOver', onOut: 'dragOut', onDrop: 'dragOut'}"
+    data-jqyoui-droppable="{multiple:true, onOver: 'onOver', onOut: 'onOut', onDrop: 'onDrop'}"
     ]
     h1 Talked about
 
     ul class="topics"
       li[
         ng-controller="TopicCtrl as topicCtrl"
-        ng-repeat="topic in topicsCtrl.service.talked_about"
+        ng-repeat="topic in service.talked_about"
         ng-click="topicCtrl.vote()"
         data-drag="true"
         data-jqyoui-options="{revert: 'invalid'}"
-        ng-model="topicsCtrl.service.talked_about"
-        data-jqyoui-draggable="{index: {{$index}}, animate: true}"
+        ng-model="service.talked_about"
+        data-jqyoui-draggable="{index: {{$index}}, animate: true, onStart: 'onStart', onStop: 'onStop'}"
         class="topic"
         ]
         p ng-bind="topic.title"
