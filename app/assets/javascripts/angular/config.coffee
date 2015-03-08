@@ -1,4 +1,4 @@
-angular.module("lean-coffee", ['ngAnimate', 'ngResource', 'ngDragDrop'])
+angular.module("lean-coffee", ['ngAnimate', 'ngResource', 'ngDragDrop', 'pusher-angular'])
   .config ($httpProvider) ->
     authToken = $("meta[name=\"csrf-token\"]").attr("content")
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken

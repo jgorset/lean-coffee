@@ -15,9 +15,17 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require angular
+#= require pusher
+#= require pusher-angular
 #= require angular-animate
 #= require angular-resource
 #= require angular-dragdrop
 #= require lodash
 #= require angular/config
 #= require_tree .
+
+window.pusherClient   = new Pusher 'c85f129d4e4efa53a758', cluster: 'eu'
+window.pusherSocketId = null
+
+pusherClient.connection.bind 'connected', =>
+  window.pusherSocketId = pusherClient.connection.socket_id

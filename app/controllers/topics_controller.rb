@@ -8,11 +8,22 @@ class TopicsController < ApplicationController
     end
   end
 
+  def show
+    @topic = Topic.find params[:id]
+
+    respond_to do |format|
+      format.html
+      format.json { render 'show' }
+    end
+  end
+
   def create
     @topic = Topic.new topic_params
 
     respond_to do |format|
       if @topic.save
+        push_new_topic @topic
+
         format.html { redirect_to topics_path }
         format.json { render 'show', status: :created }
       else
@@ -29,6 +40,8 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
+        push_updated_topic @topic
+
         format.html { redirect_to topics_path }
         format.json { render 'show', status: :created }
       else
@@ -41,6 +54,14 @@ class TopicsController < ApplicationController
   private
 
   def topic_params
-    params.require(:topic).permit(:title, :status)
+    params.require(:topic).permit(:title, :status, :votes)
+  end
+
+  def push_new_topic topic
+    Pusher.trigger 'channel', 'new_topic', topic, socket_id: params[:socket_id]
+  end
+
+  def push_updated_topic topic
+    Pusher.trigger 'channel', 'updated_topic', topic, socket_id: params[:socket_id]
   end
 end

@@ -5,4 +5,7 @@ angular.module "lean-coffee"
     @vote = =>
       topicsService.voteFor(@topic)
 
+    $scope.topicStoppedDraggingCallback = (e) =>
+      topicsService.move @topic, $scope.targetLane
+
     this
