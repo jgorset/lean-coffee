@@ -1,7 +1,5 @@
 # Lean Coffee
 
-![Demo](https://raw.githubusercontent.com/jgorset/lean-coffee/master/doc/animated.gif)
-
 Lean Coffee is a structured, but agenda-less meeting. Participants gather, build an agenda,
 and begin talking. Conversations are directed and productive because the agenda for the
 meeting was democratically generated.
@@ -10,6 +8,10 @@ Agile Weekly has a [nice video](https://www.youtube.com/watch?v=zhG-A-kRPAU) on 
 Lean Coffee.
 
 This application is for running one for distributed teams. It's pretty cool.
+
+## Demonstration
+
+![Demo](https://raw.githubusercontent.com/jgorset/lean-coffee/master/doc/animated.gif)
 
 ## Dependencies
 
