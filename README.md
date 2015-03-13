@@ -54,5 +54,5 @@ to work. In fact, you should tweet me anyway.
 
 ## I love Hyper
 
-I work at Hyper with a bunch of awesome folks who are all every bit as passionate about good code
-as myself. If you're using this library, we probably want to hire you.
+I work at [Hyper](http://hyper.no) with a bunch of awesome folks who are all every bit as passionate
+about making things as I am. If you're using this application, we probably want to hire you.
