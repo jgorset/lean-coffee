@@ -96,6 +96,16 @@
         display: flex
         justify-content: center
         flex-direction: column
+      &:hover
+        .hover-options
+          display: block
+
+      .hover-options
+        position: absolute
+        top: 7px
+        right: 10px
+        display: none
+        z-index: 1000
 
       .votes
         position: absolute
