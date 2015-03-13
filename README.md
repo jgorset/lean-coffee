@@ -28,7 +28,7 @@ Install the gems:
 
 Create a PostgreSQL database:
 
-`$ psql -d template1 -c "CREATE DATABASE lean-coffee-production"
+`$ psql -d template1 -c "CREATE DATABASE lean-coffee-production"`
 
 Initialize the database:
 
