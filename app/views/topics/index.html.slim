@@ -58,7 +58,7 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         ]
         p ng-bind="topic.title"
         ul class="votes"
-          li class="vote" ng-repeat="vote in topicsCtrl.times(topic.votes) track by $index" I
+          li class="vote" ng-bind-html="topic.votes | toRoman"
 
   div[
     class="talked-about lane"
@@ -83,4 +83,4 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         ]
         p ng-bind="topic.title"
         ul class="votes"
-          li class="vote" ng-repeat="vote in topicsCtrl.times(topic.votes) track by $index" I
+          li class="vote"  ng-bind-html="topic.votes | toRoman"
