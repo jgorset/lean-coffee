@@ -7,7 +7,7 @@ meeting was democratically generated.
 Agile Weekly has a [nice video](https://www.youtube.com/watch?v=zhG-A-kRPAU) on how to run a
 Lean Coffee.
 
-This application is for running one for distributed teams. It's pretty cool.
+This application is for running one with distributed teams. It's pretty cool.
 
 ## Demonstration
 
