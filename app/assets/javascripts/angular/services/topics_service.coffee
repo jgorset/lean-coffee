@@ -19,13 +19,7 @@ angular.module "lean-coffee"
         @sort()
 
         for topic in topics
-          switch topic.status
-            when "to_talk_about"
-              @to_talk_about.unshift topic
-            when "talking_about"
-              @talking_about.unshift topic
-            when "talked_about"
-              @talked_about.unshift topic
+          @addTopic(topic)
 
     @create = (attributes) =>
       topic = new Topic(attributes)
@@ -42,9 +36,24 @@ angular.module "lean-coffee"
         when "talked_about"
           @talked_about.unshift topic
 
-    @updateTopic = (topic) =>
-      topic = _.find @to_talk_about, (t) => t.id == topic.id
+    @updateTopic = (updatedTopic) =>
+      finder = (topic) => topic.id == updatedTopic.id
+
+      topic = _.find(@to_talk_about, finder) || _.find(@talking_about, finder) || _.find(@talked_about, finder)
+
       topic.$get()
+        .then (topic) =>
+          for list in [@to_talk_about, @talking_about, @talked_about]
+            index = _.indexOf(list, topic)
+            list.splice(index, 1)
+
+          switch topic.status
+            when "to_talk_about"
+              @to_talk_about.unshift topic
+            when "talking_about"
+              @talking_about.unshift topic
+            when "talked_about"
+              @talked_about.unshift topic
 
     @voteFor = (topic) =>
       topic.votes += 1
