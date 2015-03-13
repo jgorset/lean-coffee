@@ -39,3 +39,20 @@ Initialize the database:
 Run the server:
 
 `$ rails server`
+
+## Contribute
+
+* Fork [the repository](http://github.com/jgorset/lean-coffee).
+* Do your thing (preferably on a feature branch).
+* Write a test that demonstrates that the bug was fixed or the feature works as expected.
+* Send a pull request and bug me until I merge it!
+
+## I love you
+
+Johannes Gorset made this. You should [tweet me](http://twitter.com/jgorset) if you can't get it
+to work. In fact, you should tweet me anyway.
+
+## I love Hyper
+
+I work at Hyper with a bunch of awesome folks who are all every bit as passionate about good code
+as myself. If you're using this library, we probably want to hire you.
