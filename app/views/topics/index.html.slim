@@ -8,7 +8,7 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
       div[
         class="{{lane | lowercase | hyphens}} lane"
         data-lane="{{lane | lowercase | underscores}}"
-        ng-model="service.lanes[$index]"
+        ng-model="service.lanes[lane_index]"
         data-drop="true"
         data-jqyoui-droppable="{multiple:true, onOver: 'topicOverLaneCallback', onOut: 'topicOutOfLaneCallback', onDrop: 'topicDroppedInLaneCallback'}"
         ]
@@ -22,11 +22,11 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         ul class="topics"
           li[
             ng-controller="TopicCtrl as topicCtrl"
-            ng-repeat="topic in service.lanes[$index]"
+            ng-repeat="topic in service.lanes[lane_index]"
             ng-click="topicCtrl.vote()"
             data-drag="true"
             data-jqyoui-options="{revert: 'invalid'}"
-            ng-model="service.lanes[$index]"
+            ng-model="service.lanes[lane_index]"
             data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
             class="topic"
             ]
