@@ -3,6 +3,7 @@ angular.module "lean-coffee"
     @to_talk_about = []
     @talking_about = []
     @talked_about  = []
+    @lanes = [@to_talk_about, @talking_about, @talked_about]
 
     pusher = $pusher(pusherClient)
 
@@ -61,9 +62,9 @@ angular.module "lean-coffee"
     @destroy = (topic) =>
       topic.$delete()
 
-      for list in [@to_talk_about, @talking_about, @talked_about]
-        index = _.indexOf(list, topic)
-        list.splice(index, 1)
+      #for list in [@to_talk_about, @talking_about, @talked_about]
+      #  index = _.indexOf(list, topic)
+      #  list.splice(index, 1)
 
     @sort = =>
       for list in [@to_talk_about, @talking_about, @talked_about]
