@@ -56,6 +56,11 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
         class="topic"
         ]
+        small class="hover-options" ng-click="$event.stopPropagation()"
+          i[
+            class="fa fa-eraser fa-fw"
+            ng-click="topicCtrl.remove_vote()"
+            ]
         p ng-bind="topic.title"
         ul class="votes"
           li class="vote" ng-bind-html="topic.votes | toRoman"
@@ -81,6 +86,11 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
         class="topic"
         ]
+        small class="hover-options" ng-click="$event.stopPropagation()"
+          i[
+            class="fa fa-eraser fa-fw"
+            ng-click="topicCtrl.remove_vote()"
+            ]
         p ng-bind="topic.title"
         ul class="votes"
           li class="vote"  ng-bind-html="topic.votes | toRoman"
