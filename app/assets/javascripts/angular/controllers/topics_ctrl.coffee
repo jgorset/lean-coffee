@@ -14,8 +14,6 @@ angular.module "lean-coffee"
     $scope.topicOverLaneCallback = (e) =>
       element = angular.element(e.target)
       topicsService.targetLane = element.data('lane')
-      
-      console.log topicsService.targetLane
       element.addClass('hovering')
 
     $scope.topicDroppedOutsideLaneCallback = (e) =>
@@ -23,8 +21,6 @@ angular.module "lean-coffee"
 
     $scope.topicOutOfLaneCallback = (e) =>
       angular.element(e.target).removeClass('hovering')
-      topicsService.targetLane = 0
-      console.log topicsService.targetLane
 
     $scope.topicDroppedInLaneCallback= (e) =>
       angular.element(e.target).removeClass('hovering')
