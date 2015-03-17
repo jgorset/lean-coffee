@@ -1,86 +1,44 @@
 div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
 
+
   div[
-    class="to-talk-about lane"
     ng-controller="LaneCtrl as laneCtrl"
-    data-lane="to_talk_about"
-    ng-model="service.to_talk_about"
-    data-drop="true"
-    data-jqyoui-droppable="{multiple:true, onOver: 'topicOverLaneCallback', onOut: 'topicOutOfLaneCallback', onDrop: 'topicDroppedInLaneCallback'}"
     ]
-    h1 To talk about
-
-    i class="sort fa fa-sort-amount-desc" ng-click="service.sort()"
-
-    form ng-submit="topicsCtrl.create()"
-      input ng-model="topicsCtrl.title" class="new-topic" type="text"
-
-    ul class="topics"
-      li[
-        ng-controller="TopicCtrl as topicCtrl"
-        ng-repeat="topic in service.to_talk_about"
-        ng-click="topicCtrl.vote()"
-        data-drag="true"
-        data-jqyoui-options="{revert: 'invalid'}"
-        ng-model="service.to_talk_about"
-        data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
-        class="topic"
+    div ng-repeat="(lane_index,lane) in laneCtrl.lanes"
+      div[
+        class="{{lane | lowercase | hyphens}} lane"
+        data-lane="{{lane | lowercase | underscores}}"
+        ng-model="service.lanes[lane_index]"
+        data-drop="true"
+        data-jqyoui-droppable="{multiple:true, onOver: 'topicOverLaneCallback', onOut: 'topicOutOfLaneCallback', onDrop: 'topicDroppedInLaneCallback'}"
         ]
-        small class="hover-options" ng-click="$event.stopPropagation()"
-          i[
-            class="fa fa-eraser fa-fw"
-            ng-click="topicCtrl.remove_vote()"
+        h1 ng-bind="lane"
+
+        i class="sort fa fa-sort-amount-desc" ng-click="service.sort()"
+
+        form ng-submit="topicsCtrl.create()" ng-if="$first"
+          input ng-model="topicsCtrl.title" class="new-topic" type="text"
+
+        ul class="topics"
+          li[
+            ng-controller="TopicCtrl as topicCtrl"
+            ng-repeat="topic in service.lanes[lane_index]"
+            ng-click="topicCtrl.vote()"
+            data-drag="true"
+            data-jqyoui-options="{revert: 'invalid'}"
+            ng-model="service.lanes[lane_index]"
+            data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
+            class="topic"
             ]
-        p ng-bind="topic.title"
-        ul class="votes"
-          li class="vote" ng-bind-html="topic.votes | toRoman"
-
-  div[
-    class="talking-about lane"
-    ng-controller="LaneCtrl as laneCtrl"
-    data-lane="talking_about"
-    ng-model="service.talking_about"
-    data-drop="true"
-    data-jqyoui-droppable="{multiple:true, onOver: 'topicOverLaneCallback', onOut: 'topicOutOfLaneCallback', onDrop: 'topicDroppedInLaneCallback'}"
-    ]
-    h1 Talking about
-
-    ul class="topics"
-      li[
-        ng-controller="TopicCtrl as topicCtrl"
-        ng-repeat="topic in service.talking_about"
-        ng-click="topicCtrl.vote()"
-        data-drag="true"
-        data-jqyoui-options="{revert: 'invalid'}"
-        ng-model="service.talking_about"
-        data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
-        class="topic"
-        ]
-        p ng-bind="topic.title"
-        ul class="votes"
-          li class="vote" ng-bind-html="topic.votes | toRoman"
-
-  div[
-    class="talked-about lane"
-    ng-controller="LaneCtrl as laneCtrl"
-    data-lane="talked_about"
-    ng-model="service.talked_about"
-    data-drop="true"
-    data-jqyoui-droppable="{multiple:true, onOver: 'topicOverLaneCallback', onOut: 'topicOutOfLaneCallback', onDrop: 'topicDroppedInLaneCallback'}"
-    ]
-    h1 Talked about
-
-    ul class="topics"
-      li[
-        ng-controller="TopicCtrl as topicCtrl"
-        ng-repeat="topic in service.talked_about"
-        ng-click="topicCtrl.vote()"
-        data-drag="true"
-        data-jqyoui-options="{revert: 'invalid'}"
-        ng-model="service.talked_about"
-        data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
-        class="topic"
-        ]
-        p ng-bind="topic.title"
-        ul class="votes"
-          li class="vote"  ng-bind-html="topic.votes | toRoman"
+            small class="hover-options" ng-click="$event.stopPropagation()"
+              i[
+                class="fa fa-eraser fa-fw"
+                ng-click="topicCtrl.remove_vote()"
+                ]
+              i[
+                class="fa fa-trash fa-fw"
+                ng-click="topicCtrl.remove_topic()"
+                ]
+            p ng-bind="topic.title"
+            ul class="votes"
+              li class="vote" ng-bind-html="topic.votes | toRoman"
