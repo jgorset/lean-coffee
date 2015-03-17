@@ -14,6 +14,6 @@ angular.module "lean-coffee"
         topicsService.destroy(@topic)
 
     $scope.topicStoppedDraggingCallback = (e) =>
-      topicsService.move @topic, $scope.targetLane
+      topicsService.move @topic, topicsService.targetLane
 
     this

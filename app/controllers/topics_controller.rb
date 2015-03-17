@@ -51,6 +51,18 @@ class TopicsController < ApplicationController
     end
   end
 
+  def destroy
+    @topic = Topic.find params[:id]
+    respond_to do |format|
+      if @topic.destroy
+        push_updated_topic @topic
+        
+        format.html { redirect_to :index }
+        format.json { head :no_content }
+      end
+    end
+  end
+
   private
 
   def topic_params

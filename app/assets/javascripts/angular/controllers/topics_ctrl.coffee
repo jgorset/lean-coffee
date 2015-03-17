@@ -10,14 +10,21 @@ angular.module "lean-coffee"
     @times = (n) =>
       new Array(n)
 
+
     $scope.topicOverLaneCallback = (e) =>
       element = angular.element(e.target)
-
-      $scope.targetLane = element.data('lane')
+      topicsService.targetLane = element.data('lane')
+      
+      console.log topicsService.targetLane
       element.addClass('hovering')
+
+    $scope.topicDroppedOutsideLaneCallback = (e) =>
+      alert 'test'
 
     $scope.topicOutOfLaneCallback = (e) =>
       angular.element(e.target).removeClass('hovering')
+      topicsService.targetLane = 0
+      console.log topicsService.targetLane
 
     $scope.topicDroppedInLaneCallback= (e) =>
       angular.element(e.target).removeClass('hovering')

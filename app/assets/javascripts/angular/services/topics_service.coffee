@@ -1,9 +1,9 @@
 angular.module "lean-coffee"
   .service "topicsService", ($rootScope, $resource, $pusher, Topic) ->
-    @to_talk_about = []
-    @talking_about = []
-    @talked_about  = []
-    @lanes = [@to_talk_about, @talking_about, @talked_about]
+    @topics = Topic.query =>
+      @sort()
+
+    @targetLane = 0
 
     pusher = $pusher(pusherClient)
 
@@ -15,19 +15,6 @@ angular.module "lean-coffee"
     channel.bind 'updated_topic', (topic) =>
       @updateTopic new Topic(topic)
 
-    @load = =>
-      topics = Topic.query =>
-        @sort()
-
-        for topic in topics
-          switch topic.status
-            when "to_talk_about"
-              @to_talk_about.unshift topic
-            when "talking_about"
-              @talking_about.unshift topic
-            when "talked_about"
-              @talked_about.unshift topic
-
     @create = (attributes) =>
       topic = new Topic(attributes)
       topic.$save()
@@ -35,17 +22,13 @@ angular.module "lean-coffee"
           @addTopic(topic)
 
     @addTopic = (topic) =>
-      switch topic.status
-        when "to_talk_about"
-          @to_talk_about.unshift topic
-        when "talking_about"
-          @talking_about.unshift topic
-        when "talked_about"
-          @talked_about.unshift topic
+      @topics.unshift topic
 
     @updateTopic = (topic) =>
-      topic = _.find @to_talk_about, (t) => t.id == topic.id
-      topic.$get()
+      old_topic = _.find @topics, (t) =>
+        t.id == topic.id
+      index = _.indexOf(@topics, old_topic)
+      @topics[index] = topic
 
     @voteFor = (topic) =>
       topic.votes += 1
@@ -59,17 +42,13 @@ angular.module "lean-coffee"
       topic.status = lane
       topic.$update()
 
+
     @destroy = (topic) =>
       topic.$delete()
-
-      #for list in [@to_talk_about, @talking_about, @talked_about]
-      #  index = _.indexOf(list, topic)
-      #  list.splice(index, 1)
+      index = _.indexOf(@topics, topic)
+      @topics.splice(index, 1)
 
     @sort = =>
-      for list in [@to_talk_about, @talking_about, @talked_about]
-        list.sort (a, b) => b.votes - a.votes
-
-    @load()
+      @topics.sort (a, b) => b.votes - a.votes
 
     this
