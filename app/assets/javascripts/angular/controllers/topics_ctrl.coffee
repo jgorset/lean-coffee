@@ -7,6 +7,14 @@ angular.module "lean-coffee"
         topicsService.create title: @title
         @title = ""
 
+    @update = (topic) =>
+      if topic.title.length
+        topic.$update()
+
+    @remove_topic = (topic) =>
+      if confirm('Are you sure you want to delete this?')
+        topicsService.destroy(topic)
+
     @times = (n) =>
       new Array(n)
 
