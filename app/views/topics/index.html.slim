@@ -41,7 +41,8 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
                 ng-click="topicCtrl.remove_vote()"
                 ]
               i[
-                class="fa fa-cog fa-fw"
+                ng-class="{'fa-times' : topicCtrl.edit_topic, 'fa-pencil' : !topicCtrl.edit_topic}"
+                class="fa fa-fw" 
                 ng-click="topicCtrl.edit()"
                 ]
               i[
