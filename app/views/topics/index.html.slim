@@ -25,7 +25,6 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
           li[
             ng-controller="TopicCtrl as topicCtrl"
             ng-repeat="topic in service.topics | filter:(lane | lowercase | underscores)"
-            ng-dblClick="topicCtrl.vote()"
             data-drag="true"
             data-jqyoui-options="{revert: 'invalid'}"
             ng-model="service.topics"
@@ -34,13 +33,25 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
             ]
             small class="hover-options" ng-click="$event.stopPropagation()"
               i[
-                class="fa fa-eraser fa-fw"
+                class="fa fa-plus fa-fw"
+                ng-click="topicCtrl.vote()"
+                ]
+              i[
+                class="fa fa-minus fa-fw"
                 ng-click="topicCtrl.remove_vote()"
                 ]
               i[
-                class="fa fa-trash fa-fw"
-                ng-click="topicCtrl.remove_topic()"
+                ng-class="{'fa-times' : topicCtrl.edit_topic, 'fa-pencil' : !topicCtrl.edit_topic}"
+                class="fa fa-fw" 
+                ng-click="topicCtrl.edit()"
                 ]
-            p ng-bind="topic.title"
+              i[
+                class="fa fa-trash fa-fw"
+                ng-click="topicsCtrl.remove_topic(topic)"
+                ]
+            p ng-bind="topic.title" ng-class="{'hidden' : topicCtrl.edit_topic}"
+            form ng-submit="topicsCtrl.update(topic); topicCtrl.edit_topic = false" ng-class="{'visible' : topicCtrl.edit_topic}" class="edit-topic"  ng-click="$event.stopPropagation()"
+              input ng-model="topic.title" class="edit-topic" type="text" ng-class="{'visible' : topicCtrl.edit_topic}"
+
             ul class="votes"
               li class="vote" ng-bind-html="topic.votes | toRoman"
