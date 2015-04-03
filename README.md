@@ -36,9 +36,19 @@ Initialize the database:
 
 `$ rake db:setup`
 
+Then add the constraints on topics.votes (only positive numbers):
+
+`rake db:add_constraints`
+
 Run the server:
 
 `$ rails server`
+
+### Notes
+
+Constraings on votes can be removed by running:
+
+`rake db:remove_constraints`
 
 ## Contribute
 
