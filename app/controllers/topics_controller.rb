@@ -10,9 +10,9 @@ class TopicsController < ApplicationController
 
   def vote
     @topic = Topic.find params[:id]
-    @topic.votes += 1
+    @topic.increment :votes
     respond_to do |format|
-      if @topic.save
+      if @topic.save 
         push_updated_topic @topic
 
         format.html { redirect_to topics_path }
@@ -26,7 +26,7 @@ class TopicsController < ApplicationController
 
   def remove_vote
     @topic = Topic.find params[:id]
-    @topic.votes -= 1 unless @topic.votes < 1
+    @topic.decrement :votes 
     respond_to do |format|
       if @topic.save
         push_updated_topic @topic
