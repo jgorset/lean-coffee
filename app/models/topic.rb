@@ -6,5 +6,5 @@ class Topic < ActiveRecord::Base
     default: :to_talk_about
 
   validates :status, presence: true
-  validates :votes, :numericality => { :greater_than_or_equal_to => 0 }
+
 end
