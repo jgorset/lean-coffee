@@ -16,7 +16,7 @@ class TopicsController < ApplicationController
         push_updated_topic @topic
 
         format.html { redirect_to topics_path }
-        format.json { render 'show', status: :created }
+        format.json { render 'show', status: :ok }
       else
         format.html { redirect_to :new }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
         push_updated_topic @topic
 
         format.html { redirect_to topics_path }
-        format.json { render 'show', status: :created }
+        format.json { render 'show', status: :ok }
       else
         format.html { redirect_to :new }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
