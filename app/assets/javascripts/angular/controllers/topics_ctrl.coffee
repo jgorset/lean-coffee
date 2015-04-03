@@ -11,9 +11,9 @@ angular.module "lean-coffee"
       if topic.title.length
         topic.$update()
 
-    @remove_topic = (topic) =>
+    @delete = (topic) =>
       if confirm('Are you sure you want to delete this?')
-        topicsService.destroy(topic)
+        topicsService.delete(topic)
 
     @times = (n) =>
       new Array(n)
