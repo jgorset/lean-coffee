@@ -7,7 +7,7 @@ namespace :db do
   end
 
   desc "Removes constraint to votes on topics."
-  task remove_constriants: :environment do
+  task remove_constraints: :environment do
     ActiveRecord::Base.connection.execute <<-SQL
       ALTER TABLE topics DROP CONSTRAINT positive_votes;
     SQL
