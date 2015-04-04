@@ -47,7 +47,7 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
                 ]
               i[
                 class="fa fa-trash fa-fw"
-                ng-click="topicsCtrl.remove_topic(topic)"
+                ng-click="topicsCtrl.delete(topic)"
                 ]
             p ng-bind="topic.title" ng-class="{'hidden' : topicCtrl.edit_topic}"
             form ng-submit="topicsCtrl.update(topic); topicCtrl.edit_topic = false" ng-class="{'visible' : topicCtrl.edit_topic}" class="edit-topic"  ng-click="$event.stopPropagation()"

@@ -6,4 +6,5 @@ class Topic < ActiveRecord::Base
     default: :to_talk_about
 
   validates :status, presence: true
+
 end

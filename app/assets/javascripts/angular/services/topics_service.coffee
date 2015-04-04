@@ -31,22 +31,21 @@ angular.module "lean-coffee"
       @topics[index] = topic
 
     @voteFor = (topic) =>
-      topic.votes += 1
-      topic.$update()
+      topic.$vote()
 
     @removeVoteFor = (topic) =>
-      topic.votes -= 1
-      topic.$update()
+      topic.$remove_vote()
 
     @move = (topic, lane) =>
       topic.status = lane
       topic.$update()
 
 
-    @destroy = (topic) =>
+    @delete = (topic) =>
       topic.$delete()
-      index = _.indexOf(@topics, topic)
-      @topics.splice(index, 1)
+        .then (topic) =>
+          index = _.indexOf(@topics, topic)
+          @topics.splice(index, 1)
 
     @sort = =>
       @topics.sort (a, b) => b.votes - a.votes

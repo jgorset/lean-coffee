@@ -8,6 +8,36 @@ class TopicsController < ApplicationController
     end
   end
 
+  def vote
+    @topic = Topic.find params[:id]
+    respond_to do |format|
+      if @topic.increment! :votes
+        push_updated_topic @topic
+
+        format.html { redirect_to topics_path }
+        format.json { render 'show', status: :ok }
+      else
+        format.html { redirect_to :new }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_vote
+    @topic = Topic.find params[:id] 
+    respond_to do |format|
+      if @topic.decrement! :votes
+        push_updated_topic @topic
+
+        format.html { redirect_to topics_path }
+        format.json { render 'show', status: :ok }
+      else
+        format.html { redirect_to :new }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def show
     @topic = Topic.find params[:id]
 
