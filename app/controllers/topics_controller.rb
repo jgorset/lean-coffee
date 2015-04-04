@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
 
-  rescue_from PG::CheckViolation, with: :constrian_above_zero
+  rescue_from PG::CheckViolation, with: :constrain_above_zero
 
   def index
     @topics = Topic.all
@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
 
   private
 
-  def constrian_above_zero
+  def constrain_above_zero
     @topic.errors.add(:votes, "cannot be less than 0")
     respond_to do |format|
       format.html { redirect_to :new }
