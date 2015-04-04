@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+
+  rescue_from PG::CheckViolation, with: :constrain_above_zero
+
   def index
     @topics = Topic.all
 
@@ -13,12 +16,8 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @topic.increment! :votes
         push_updated_topic @topic
-
         format.html { redirect_to topics_path }
         format.json { render 'show', status: :ok }
-      else
-        format.html { redirect_to :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -28,12 +27,8 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @topic.decrement! :votes
         push_updated_topic @topic
-
         format.html { redirect_to topics_path }
         format.json { render 'show', status: :ok }
-      else
-        format.html { redirect_to :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -94,6 +89,14 @@ class TopicsController < ApplicationController
   end
 
   private
+
+  def constrain_above_zero
+    @topic.errors.add(:votes, "cannot be less than 0")
+    respond_to do |format|
+      format.html { redirect_to :new }
+      format.json { render json: @topic.errors, status: :unprocessable_entity }
+    end
+  end
 
   def topic_params
     params.require(:topic).permit(:title, :status, :votes)
