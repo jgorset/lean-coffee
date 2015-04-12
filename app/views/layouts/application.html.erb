@@ -5,6 +5,25 @@
   <script type="text/javascript">
     window.PUSHER_KEY = "<%= ENV['PUSHER_KEY'] %>"
   </script>
+
+  <% %w(57 60 72 76 114 120 144 152 180).each do |s| %>
+      <%= favicon_link_tag "favicons/apple-touch-icon-#{s}x#{s}.png", rel: 'apple-touch-icon', type: 'image/png', sizes: "#{s}x#{s}" %>
+  <% end %>
+
+  <% %w(36 48 72 96 144 192).each do |s| %>
+      <%= favicon_link_tag "favicons/android-chrome-#{s}x#{s}.png", rel: 'android-chrome', type: 'image/png', sizes: "#{s}x#{s}" %>
+  <% end %>
+
+  <% %w(70 144 150  310).each do |s| %>
+      <%= favicon_link_tag "favicons/mstile-#{s}x#{s}.png", rel: 'mstile', type: 'image/png', sizes: "#{s}x#{s}" %>
+  <% end %>
+
+  <% %w(16 32).each do |s| %>
+      <%= favicon_link_tag "favicons/favicon-#{s}x#{s}.png", rel: 'icon', type: 'image/png', sizes: "#{s}x#{s}" %>
+  <% end %>
+
+  
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
