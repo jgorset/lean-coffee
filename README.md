@@ -15,7 +15,7 @@ This application is for running one with distributed teams. It's pretty cool.
 
 ## Dependencies
 
-You'll need [Ruby 2.1](https://www.ruby-lang.org/en/) with [Bundler](http://bundler.io/) and
+You'll need [Ruby 2](https://www.ruby-lang.org/en/) with [Bundler](http://bundler.io/) and
 [PostgreSQL](http://www.postgresql.org/) to run Lean Coffee.
 
 ## Installation
