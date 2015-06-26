@@ -4,6 +4,7 @@
   <title>LeanCoffee</title>
   <script type="text/javascript">
     window.PUSHER_KEY = "<%= ENV['PUSHER_KEY'] %>"
+    window.PUSHER_CLUSTER = "<%= ENV['PUSHER_CLUSTER'] %>"
   </script>
 
   <% %w(57 60 72 76 114 120 144 152 180).each do |s| %>
@@ -22,7 +23,7 @@
       <%= favicon_link_tag "favicons/favicon-#{s}x#{s}.png", rel: 'icon', type: 'image/png', sizes: "#{s}x#{s}" %>
   <% end %>
 
-  
+
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

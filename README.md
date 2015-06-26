@@ -15,7 +15,7 @@ This application is for running one with distributed teams. It's pretty cool.
 
 ## Dependencies
 
-You'll need [Ruby 2.1](https://www.ruby-lang.org/en/) with [Bundler](http://bundler.io/) and
+You'll need [Ruby 2](https://www.ruby-lang.org/en/) with [Bundler](http://bundler.io/) and
 [PostgreSQL](http://www.postgresql.org/) to run Lean Coffee.
 
 ## Installation
@@ -30,7 +30,9 @@ Install the gems:
 
 Create a PostgreSQL database:
 
-`$ psql -d template1 -c "CREATE DATABASE lean-coffee-production"`
+`$ psql -d template1 -c "CREATE DATABASE lean_coffee_development"`
+
+Pusher.com: You'll need a `PUSHER_URL` and a `PUSHER_KEY` in your `ENV`. You can set up a free sandbox account if you need to. If your Pusher app is in the EU datacenter, you'll also need to add `PUSHER_CLUSTER=eu` to your `ENV`.
 
 Initialize the database:
 
@@ -46,7 +48,7 @@ Run the server:
 
 ### Notes
 
-Constraings on votes can be removed by running:
+Constraints on votes can be removed by running:
 
 `rake db:remove_constraints`
 

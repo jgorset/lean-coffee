@@ -24,7 +24,9 @@
 #= require angular/config
 #= require_tree .
 
-window.pusherClient   = new Pusher PUSHER_KEY, cluster: 'eu'
+pusherOpts = {}
+pusherOpts.cluster = PUSHER_CLUSTER if PUSHER_CLUSTER?
+window.pusherClient   = new Pusher PUSHER_KEY, pusherOpts
 window.pusherSocketId = null
 
 pusherClient.connection.bind 'connected', =>
