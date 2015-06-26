@@ -2,17 +2,14 @@ class TopicsController < ApplicationController
 
   rescue_from PG::CheckViolation, with: :constrain_above_zero
 
-  def index
-    @topics = Topic.all
+  before_action :get_room
 
-    respond_to do |format|
-      format.html
-      format.json { render 'index' }
-    end
+  def index
+    @topics = @room.topics.all
   end
 
   def vote
-    @topic = Topic.find params[:id]
+    @topic = @room.topics.find params[:id]
     respond_to do |format|
       if @topic.increment! :votes
         push_updated_topic @topic
@@ -23,7 +20,7 @@ class TopicsController < ApplicationController
   end
 
   def remove_vote
-    @topic = Topic.find params[:id] 
+    @topic = @room.topics.find params[:id]
     respond_to do |format|
       if @topic.decrement! :votes
         push_updated_topic @topic
@@ -34,7 +31,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find params[:id]
+    @topic = @room.topics.find params[:id]
 
     respond_to do |format|
       format.html
@@ -43,7 +40,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.new topic_params
+    @topic = @room.topics.new topic_params
 
     respond_to do |format|
       if @topic.save
@@ -59,7 +56,7 @@ class TopicsController < ApplicationController
   end
 
   def update
-    @topic = Topic.find params[:id]
+    @topic = @room.topics.find params[:id]
 
     @topic.attributes = topic_params
 
@@ -77,11 +74,11 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic = Topic.find params[:id]
+    @topic = @room.topics.find params[:id]
     respond_to do |format|
       if @topic.destroy
         push_updated_topic @topic
-        
+
         format.html { redirect_to :index }
         format.json { head :no_content }
       end
@@ -89,6 +86,10 @@ class TopicsController < ApplicationController
   end
 
   private
+
+  def get_room
+    @room = Room.find_by slug: params[:slug]
+  end
 
   def constrain_above_zero
     @topic.errors.add(:votes, "cannot be less than 0")
@@ -103,10 +104,10 @@ class TopicsController < ApplicationController
   end
 
   def push_new_topic topic
-    Pusher.trigger 'channel', 'new_topic', topic, socket_id: params[:socket_id]
+    Pusher.trigger @room.slug, 'new_topic', topic, socket_id: params[:socket_id]
   end
 
   def push_updated_topic topic
-    Pusher.trigger 'channel', 'updated_topic', topic, socket_id: params[:socket_id]
+    Pusher.trigger @room.slug, 'updated_topic', topic, socket_id: params[:socket_id]
   end
 end

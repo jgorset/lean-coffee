@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  resources :topics
-  put 'topics/:id/vote' => 'topics#vote'
-  put 'topics/:id/remove_vote' => 'topics#remove_vote'
+  resources :rooms, path: '', only: [:show, :update, :destroy], param: :slug do
+    member do
+      resources :topics
+      post 'topics/:id/vote' => 'topics#vote'
+      post 'topics/:id/remove_vote' => 'topics#remove_vote'
+    end
+  end
+  resources :rooms, path: 'rooms', except: [:show, :update, :destroy], param: :slug
 
-  resources :rooms, path: '', only: [:show, :update, :destroy], param: :slug
-  resources :rooms, path: 'rooms', except: :show, param: :slug
-  # get ":slug", to: "rooms#show", as: :room
   root to: 'rooms#index'
 end

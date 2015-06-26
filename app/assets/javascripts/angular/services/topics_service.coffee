@@ -7,7 +7,7 @@ angular.module "lean-coffee"
 
     pusher = $pusher(pusherClient)
 
-    channel = pusher.subscribe 'channel'
+    channel = pusher.subscribe window.location.pathname.replace('/', '')
 
     channel.bind 'new_topic', (topic) =>
       @addTopic new Topic(topic)
