@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :rooms
   resources :topics
 
   put 'topics/:id/vote' => 'topics#vote'
