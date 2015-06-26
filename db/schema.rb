@@ -17,19 +17,14 @@ ActiveRecord::Schema.define(version: 20150626152902) do
   enable_extension "plpgsql"
 
   create_table "rooms", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",        null: false
     t.string   "description"
-    t.string   "slug"
+    t.string   "slug",        null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.string   "status"
-    t.date     "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "rooms", ["slug"], name: "index_rooms_on_slug", unique: true, using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "title"
@@ -37,13 +32,10 @@ ActiveRecord::Schema.define(version: 20150626152902) do
     t.datetime "updated_at",             null: false
     t.string   "status"
     t.integer  "votes",      default: 0, null: false
-    t.integer  "session_id"
     t.integer  "room_id"
   end
 
   add_index "topics", ["room_id"], name: "index_topics_on_room_id", using: :btree
-  add_index "topics", ["session_id"], name: "index_topics_on_session_id", using: :btree
 
   add_foreign_key "topics", "rooms"
-  add_foreign_key "topics", "sessions"
 end
