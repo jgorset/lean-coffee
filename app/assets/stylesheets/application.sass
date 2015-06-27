@@ -14,28 +14,37 @@
 @import "font-awesome-sprockets"
 @import "font-awesome"
 @import "topics"
+@import "rooms"
 @import "mixins/responsive"
+
+$primary-color: rgba(245, 125, 45, 0.9)
+$light-color: #fff
+$dark-color: #283130
 
 *
   box-sizing: border-box
 
 body
-  background: rgba(245, 125, 45, 0.9)
-  color: #fff
+  background: $primary-color
+  color: $light-color
   font-size: 14px
   font-family: "proxima-nova"
   -webkit-font-smoothing: antialiased
+  margin: 0
 
 h1
   font-size: 1.5em
   line-height: 150%
   text-transform: uppercase
-  color: #fff
+  color: $light-color
   margin: 0 0 1em 0
 
 p
   font-size: 1em
   line-height: 150%
+  margin: 0 0 1.5em
+  &:last-child
+    margin-bottom: 0
 
 .wf-loading h1,
 .wf-loading h2,
