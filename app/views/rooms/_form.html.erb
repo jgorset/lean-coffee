@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true  %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 2 %>
   </div>
   <div class="field">
-    <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
+    <%= f.label :slug, "URL" %>
+    <%= f.text_field :slug, placeholder: "the part that goes after the /" %>
   </div>
   <div class="actions">
     <%= f.submit %>
