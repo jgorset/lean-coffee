@@ -22,7 +22,7 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         ul class="topics"
           li[
             ng-controller="TopicCtrl as topicCtrl"
-            ng-repeat="topic in service.topics | filter:(lane | lowercase | underscores)"
+            ng-repeat="topic in service.topics | filter:(lane | lowercase | underscores) | filter:false:topic.archived"
             data-drag="true"
             data-jqyoui-options="{revert: 'invalid'}"
             ng-model="service.topics"
@@ -43,6 +43,13 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
                 class="fa fa-fw"
                 ng-click="topicCtrl.edit()"
                 ]
+              br
+              span ng-if="(lane | lowercase | underscores) === 'talked_about'"
+                i[
+                  class="fa fa-archive fa-fw"
+                  ng-click="topicsCtrl.archive(topic)"
+                ]
+                br
               i[
                 class="fa fa-trash fa-fw"
                 ng-click="topicsCtrl.delete(topic)"

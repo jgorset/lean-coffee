@@ -15,6 +15,10 @@ angular.module "lean-coffee"
       if confirm('Are you sure you want to delete this?')
         topicsService.delete(topic)
 
+    @archive = (topic) =>
+      if confirm('Are you sure you want to archive this?')
+        topicsService.archive(topic)
+
     @times = (n) =>
       new Array(n)
 

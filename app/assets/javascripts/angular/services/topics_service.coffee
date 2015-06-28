@@ -36,6 +36,9 @@ angular.module "lean-coffee"
     @removeVoteFor = (topic) =>
       topic.$remove_vote()
 
+    @archive = (topic) =>
+      topic.$archive()
+
     @move = (topic, lane) =>
       topic.status = lane
       topic.$update()

@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   before_action :get_room
 
   def index
-    @topics = @room.topics.all
+    @topics = @room.topics.where(archived: false)
   end
 
   def vote
@@ -23,6 +23,17 @@ class TopicsController < ApplicationController
     @topic = @room.topics.find params[:id]
     respond_to do |format|
       if @topic.decrement! :votes
+        push_updated_topic @topic
+        format.html { redirect_to topics_path }
+        format.json { render 'show', status: :ok }
+      end
+    end
+  end
+
+  def archive
+    @topic = @room.topics.find params[:id]
+    respond_to do |format|
+      if @topic.update archived: true
         push_updated_topic @topic
         format.html { redirect_to topics_path }
         format.json { render 'show', status: :ok }
