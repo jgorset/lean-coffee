@@ -1,6 +1,4 @@
 div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
-
-
   div[
     ng-controller="LaneCtrl as laneCtrl"
     ]
@@ -42,7 +40,7 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
                 ]
               i[
                 ng-class="{'fa-times' : topicCtrl.edit_topic, 'fa-pencil' : !topicCtrl.edit_topic}"
-                class="fa fa-fw" 
+                class="fa fa-fw"
                 ng-click="topicCtrl.edit()"
                 ]
               i[
@@ -55,3 +53,19 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
 
             ul class="votes"
               li class="vote" ng-bind-html="topic.votes | toRoman"
+
+footer.bg-dark
+  h1.brand
+    a href="/"
+      | Lean
+      br
+      | Coffee
+
+  nav
+    ul
+      li
+        a href='/#room-list'
+          div Room List
+      li
+        a href=edit_room_path(@room)
+          div Edit Room Details
