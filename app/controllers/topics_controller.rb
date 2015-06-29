@@ -111,7 +111,7 @@ class TopicsController < ApplicationController
   private
 
   def get_room
-    @room = Room.find_by slug: params[:slug]
+    @room = Room.find_by! slug: params[:slug]
   end
 
   def constrain_above_zero

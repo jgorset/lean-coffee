@@ -6,8 +6,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find_by(slug: params[:slug])
-    raise ActiveRecord::RecordNotFound, "Couldn't find a room for that URL" unless @room
+    @room = Room.find_by!(slug: params[:slug])
     @topics = @room.topics.all
   end
 
@@ -60,7 +59,7 @@ class RoomsController < ApplicationController
 
   private
     def set_room
-      @room = Room.find_by slug: params[:slug]
+      @room = Room.find_by! slug: params[:slug]
     end
 
     def room_params
