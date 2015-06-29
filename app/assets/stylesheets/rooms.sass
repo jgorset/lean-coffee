@@ -53,12 +53,16 @@
   color: $primary-color
   a
     color: $primary-color
+  ul.grid li
+    color: $dark-color
 
 .bg-light
   background-color: $primary-color
   color: $light-color
   a
     color: $light-color
+  ul.grid li
+    color: $primary-color
 
 #room-list
   min-height: 100vh
@@ -69,7 +73,6 @@ ul.grid
   +display(flex)
   +flex-flow(row wrap)
   > li
-    display: block
     background-color: $light-color
     font-size: 1rem
     position: relative
@@ -77,6 +80,8 @@ ul.grid
     +display(flex)
     width: 48%
     margin: 0 2% 2% 0
+    &.no-link
+      padding: 1rem
     @media(min-width: 720px)
       width: 32%
       margin: 0 1% 1% 0
@@ -91,13 +96,13 @@ ul.grid
       &:active
         box-shadow: 2px 7px 40px rgba(0,0,0,0.2), 0 0 5px rgba(0,0,0,0.2) inset
 
-      .grid-box-icon
-        float: left
-        margin: -0.5rem
-        margin-right: 0.3rem
-      h3, p
-        margin: 0
-        word-wrap: break-word
+    .grid-box-icon
+      float: left
+      margin: -0.5rem
+      margin-right: 0.3rem
+    h3, p
+      margin: 0
+      word-wrap: break-word
 
 // forms
 .field, .actions
@@ -114,23 +119,35 @@ ul.grid
     font-size: 2.5rem
     margin-bottom: 2rem
     border: none
-  input[type="text"], textarea
+  input[type="text"], textarea, input[type="search"]
     background-color: rgba(255,255,255,0.2)
     background-image: image-url('bg-lines.png')
     padding: 0.1rem 0.7rem 0.2rem
     @media(min-width: 720px)
       width: 80%
 
+.field
+  input[type="submit"]
+    @media(min-width: 720px)
+      width: 20%
+
+.actions
+  padding: 0.5rem 2rem
+  margin: 2rem 0
+  &:hover
+    cursor: pointer
+    box-shadow: 2px 7px 40px rgba(0,0,0,0.2)
+
 .bg-dark
-  .field
-    input[type="text"], textarea
+  .field, .actions
+    input[type="text"], textarea, input[type="search"]
       color: $primary-color
-  .actions
     input[type="submit"]
       background-color: $primary-color
       color: $dark-color
-      padding: 0.5rem 2rem
-      margin: 2rem 0
-      &:hover
-        cursor: pointer
-        box-shadow: 2px 7px 40px rgba(0,0,0,0.2)
+
+body > header
+  h1 a
+    text-decoration: none
+    &:hover
+      text-decoration: underline

@@ -1,0 +1,39 @@
+<header class="bg-dark">
+  <div class="container">
+    <h1><%= link_to @room.name, @room %> Archive</h1>
+    <form action="" method="get">
+      <div class="field">
+        <input type="search" name="q" value="<%= params[:q] %>" />
+        <input type="submit" value="Search" />
+      </div>
+    </form>
+  </div>
+</header>
+
+<% @grouped_topics.each_with_index do |date_and_topics, index| %>
+  <div class="<%= index % 2 == 0 ? 'bg-light' : 'bg-dark' %>">
+    <div class="container">
+      <h1><%= date_and_topics.first %></h1>
+      <ul class="grid">
+        <% date_and_topics.last.each do |topic| %>
+          <li class="no-link">
+            <h3><%= topic.title %></h3>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<footer class="bg-dark">
+  <h1 class="brand"><a href="/">Lean<br>Coffee</a></h1>
+  <nav>
+    <ul>
+      <li>
+        <%= link_to @room do %>
+          <div><%= @room.name %></div>
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</footer>

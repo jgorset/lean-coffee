@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :rooms, path: '', only: [:show, :update, :destroy], param: :slug do
     member do
+      get :archive
+
       resources :topics do
         member do
           post :vote
