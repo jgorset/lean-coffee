@@ -5,10 +5,6 @@ angular.module "lean-coffee"
 
     @targetLane = 0
 
-    @reload = =>
-      @topics = Topic.query =>
-        @sort()
-
     pusher = $pusher(pusherClient)
 
     channel = pusher.subscribe window.location.pathname.replace('/', '')
@@ -49,7 +45,6 @@ angular.module "lean-coffee"
     @move = (topic, lane) =>
       topic.status = lane
       topic.$update()
-
 
     @delete = (topic) =>
       topic.$delete()

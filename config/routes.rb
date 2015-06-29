@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     member do
       get :archives
 
-      resources :topics do
+      resources :topics, defaults: { format: :json } do
         member do
           post :vote
           post :remove_vote

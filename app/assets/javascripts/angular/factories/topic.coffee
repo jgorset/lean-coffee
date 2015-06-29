@@ -1,7 +1,7 @@
 angular.module "lean-coffee"
   .factory "Topic", ($resource) ->
     $resource window.location.pathname + "/topics/:id",
-      { id: '@id', socket_id: -> window.pusherSocketId },
+      { id: '@id' },
       {
         update: { method: 'PUT' }
         vote: { url: window.location.pathname + '/topics/:id/vote', method: 'POST' }

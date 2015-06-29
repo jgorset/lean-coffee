@@ -27,7 +27,3 @@
 pusherOpts = {}
 pusherOpts.cluster = PUSHER_CLUSTER if PUSHER_CLUSTER?
 window.pusherClient   = new Pusher PUSHER_KEY, pusherOpts
-window.pusherSocketId = null
-
-pusherClient.connection.bind 'connected', =>
-  window.pusherSocketId = pusherClient.connection.socket_id
