@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:edit, :update, :destroy, :archive]
+  before_action :set_room, only: [:edit, :update, :destroy, :archives]
 
   def index
     @rooms = Room.all
@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
     end
   end
 
-  def archive
+  def archives
     topics = @room.topics.order('created_at DESC')
     topics.where!('title ilike ?', "%#{params[:q]}%") if params[:q]
     @grouped_topics = topics.group_by{ |t| t.created_at.to_date }
