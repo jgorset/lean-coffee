@@ -5,8 +5,8 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
     div [
         ng-repeat="(lane_index,lane) in laneCtrl.lanes"
         ]
-      div[
-        class="{{lane | lowercase | hyphens}} lane"
+      .lane.has-hover[
+        class="{{lane | lowercase | hyphens}}"
         data-lane="{{lane | lowercase | underscores}}"
         ng-model="service.topics"
         data-drop="true"
@@ -14,20 +14,21 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         ]
         h1 ng-bind="lane"
 
-        i class="sort fa fa-sort-amount-desc" ng-click="service.sort()"
+        small.hover-options
+          i class="fa fa-fw fa-archive" ng-click="topicsCtrl.archiveAll()" ng-if="(lane | lowercase | underscores) === 'talked_about'"
+          i class="fa fa-fw fa-sort-amount-desc" ng-click="service.sort()"
 
         form ng-submit="topicsCtrl.create()" ng-if="$first"
           input ng-model="topicsCtrl.title" class="new-topic" type="text"
 
         ul class="topics"
-          li[
+          li.topic.has-hover[
             ng-controller="TopicCtrl as topicCtrl"
             ng-repeat="topic in service.topics | filter:(lane | lowercase | underscores) | filter:false:topic.archived"
             data-drag="true"
             data-jqyoui-options="{revert: 'invalid'}"
             ng-model="service.topics"
             data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
-            class="topic"
             ]
             small class="hover-options" ng-click="$event.stopPropagation()"
               i[

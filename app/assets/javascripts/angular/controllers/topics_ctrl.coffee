@@ -19,6 +19,11 @@ angular.module "lean-coffee"
       if confirm('Are you sure you want to archive this?')
         topicsService.archive(topic)
 
+    @archiveAll = =>
+      if confirm('Are you sure you want to archive all discussed topics?')
+        topicsService.archiveAll()
+        topicsService.reload()
+
     @times = (n) =>
       new Array(n)
 

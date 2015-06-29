@@ -57,3 +57,17 @@ p
 .wf-active h3,
 .wf-active p
   visibility: visible
+
+.hover-options
+  position: absolute
+  top: 2px
+  right: -1px
+  display: none
+  text-align: right
+  z-index: 1000
+
+.has-hover
+  &:hover, &:focus
+    > .hover-options
+      display: block
+

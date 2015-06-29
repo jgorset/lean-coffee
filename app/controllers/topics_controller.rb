@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @topic.increment! :votes
         push_updated_topic @topic
-        format.html { redirect_to topics_path }
+        format.html { redirect_to @room }
         format.json { render 'show', status: :ok }
       end
     end
@@ -24,7 +24,7 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @topic.decrement! :votes
         push_updated_topic @topic
-        format.html { redirect_to topics_path }
+        format.html { redirect_to @room }
         format.json { render 'show', status: :ok }
       end
     end
@@ -35,9 +35,21 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @topic.update archived: true
         push_updated_topic @topic
-        format.html { redirect_to topics_path }
+        format.html { redirect_to @room }
         format.json { render 'show', status: :ok }
       end
+    end
+  end
+
+  def archive_all
+    @room.topics.where(status: :talked_about).each do |topic|
+      topic.update archived: true
+      push_updated_topic topic
+    end
+    @topics = @room.topics.where(archived: false)
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { render 'index', status: :ok }
     end
   end
 
@@ -57,7 +69,7 @@ class TopicsController < ApplicationController
       if @topic.save
         push_new_topic @topic
 
-        format.html { redirect_to topics_path }
+        format.html { redirect_to @room }
         format.json { render 'show', status: :created }
       else
         format.html { redirect_to :new }
@@ -75,7 +87,7 @@ class TopicsController < ApplicationController
       if @topic.save
         push_updated_topic @topic
 
-        format.html { redirect_to topics_path }
+        format.html { redirect_to @room }
         format.json { render 'show', status: :ok }
       else
         format.html { redirect_to :new }
