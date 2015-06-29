@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
 
   rescue_from PG::CheckViolation, with: :constrain_above_zero
 
-  before_action :get_room
+  before_action :set_room
 
   def index
     @topics = @room.topics.where(archived: false)
@@ -110,7 +110,7 @@ class TopicsController < ApplicationController
 
   private
 
-  def get_room
+  def set_room
     @room = Room.find_by! slug: params[:slug]
   end
 
