@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LeanCoffee</title>
+  <title><%= "#{@room.name} • " if @room && @room.name %>LeanCoffee</title>
   <script type="text/javascript">
     window.PUSHER_KEY = "<%= ENV['PUSHER_KEY'] %>"
     window.PUSHER_CLUSTER = "<%= ENV['PUSHER_CLUSTER'] %>"
@@ -33,7 +33,7 @@
 </head>
 <body>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

@@ -7,6 +7,7 @@
 
 .lanes
   margin: 5vh
+  +clearfix
 
 .lane
   position: relative
@@ -67,7 +68,7 @@
     margin: 0
     padding: 0
     list-style: none
-    
+
     .topic
       position: relative
       background: rgba(255, 255, 255, 1)
@@ -96,17 +97,6 @@
         display: flex
         justify-content: center
         flex-direction: column
-      &:hover
-        .hover-options
-          display: block
-
-      .hover-options
-        position: absolute
-        top: 7px
-        right: 10px
-        display: none
-        z-index: 1000
-
 
       .edit-topic
         display: none
@@ -146,3 +136,4 @@
 
           &:last-of-type
             margin-right: 0
+

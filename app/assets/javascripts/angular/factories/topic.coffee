@@ -1,9 +1,11 @@
 angular.module "lean-coffee"
   .factory "Topic", ($resource) ->
-    $resource("/topics/:id",
-      { id: '@id', socket_id: -> window.pusherSocketId },
+    $resource window.location.pathname + "/topics/:id",
+      { id: '@id' },
       {
-        update: { method: 'PUT' },
-        vote: { url: '/topics/:id/vote', method: 'POST' }
-        remove_vote: { url: '/topics/:id/remove_vote', method: 'POST' }
-      })
+        update: { method: 'PUT' }
+        vote: { url: window.location.pathname + '/topics/:id/vote', method: 'POST' }
+        remove_vote: { url: window.location.pathname + '/topics/:id/remove_vote', method: 'POST' }
+        archive: { url: window.location.pathname + '/topics/:id/archive', method: 'PUT' }
+        archiveAll: { isArray: true, url: window.location.pathname + '/topics/archive', method: 'PUT' }
+      }

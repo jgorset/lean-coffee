@@ -12,6 +12,12 @@ angular.module "lean-coffee"
     @remove_vote = =>
       topicsService.removeVoteFor(@topic)
 
+    @update = =>
+      @edit_topic = false
+      if @topic.title.length
+        @topic.$update()
+
+
     $scope.topicStoppedDraggingCallback = (e) =>
       topicsService.move @topic, topicsService.targetLane
 

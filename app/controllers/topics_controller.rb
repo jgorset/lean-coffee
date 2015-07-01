@@ -2,100 +2,94 @@ class TopicsController < ApplicationController
 
   rescue_from PG::CheckViolation, with: :constrain_above_zero
 
-  def index
-    @topics = Topic.all
+  before_action :set_room
 
-    respond_to do |format|
-      format.html
-      format.json { render 'index' }
-    end
+  def index
+    @topics = @room.topics.where(archived: false)
   end
 
   def vote
-    @topic = Topic.find params[:id]
-    respond_to do |format|
-      if @topic.increment! :votes
-        push_updated_topic @topic
-        format.html { redirect_to topics_path }
-        format.json { render 'show', status: :ok }
-      end
+    @topic = @room.topics.find params[:id]
+    if @topic.increment! :votes
+      push_updated_topic @topic
+      head :ok
     end
   end
 
   def remove_vote
-    @topic = Topic.find params[:id] 
-    respond_to do |format|
-      if @topic.decrement! :votes
-        push_updated_topic @topic
-        format.html { redirect_to topics_path }
-        format.json { render 'show', status: :ok }
-      end
+    @topic = @room.topics.find params[:id]
+    if @topic.decrement! :votes
+      push_updated_topic @topic
+      head :ok
     end
+  end
+
+  def archive
+    @topic = @room.topics.find params[:id]
+    if @topic.update archived: true
+      push_updated_topic @topic
+      head :ok
+    end
+  end
+
+  def archive_all
+    @room.topics.where(status: :talked_about).each do |topic|
+      topic.update archived: true
+      push_updated_topic topic
+    end
+    @topics = @room.topics.where(archived: false)
+    head :ok
   end
 
   def show
-    @topic = Topic.find params[:id]
+    @topic = @room.topics.find params[:id]
 
-    respond_to do |format|
-      format.html
-      format.json { render 'show' }
-    end
+    render 'show'
   end
 
   def create
-    @topic = Topic.new topic_params
+    @topic = @room.topics.new topic_params
 
-    respond_to do |format|
-      if @topic.save
-        push_new_topic @topic
-
-        format.html { redirect_to topics_path }
-        format.json { render 'show', status: :created }
-      else
-        format.html { redirect_to :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
+    if @topic.save
+      push_new_topic @topic
+      head :created
+    else
+      render json: @topic.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    @topic = Topic.find params[:id]
+    @topic = @room.topics.find params[:id]
 
     @topic.attributes = topic_params
 
-    respond_to do |format|
-      if @topic.save
-        push_updated_topic @topic
-
-        format.html { redirect_to topics_path }
-        format.json { render 'show', status: :ok }
-      else
-        format.html { redirect_to :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
-      end
+    if !@topic.changed?
+      head :ok
+    elsif @topic.save
+      push_updated_topic @topic
+      head :ok
+    else
+      render json: @topic.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @topic = Topic.find params[:id]
-    respond_to do |format|
-      if @topic.destroy
-        push_updated_topic @topic
-        
-        format.html { redirect_to :index }
-        format.json { head :no_content }
-      end
+    @topic = @room.topics.find params[:id]
+    if @topic.destroy
+      push_updated_topic @topic
+      head :no_content
     end
   end
 
   private
 
+  def set_room
+    @room = Room.find_by! slug: params[:slug]
+  end
+
   def constrain_above_zero
     @topic.errors.add(:votes, "cannot be less than 0")
-    respond_to do |format|
-      format.html { redirect_to :new }
-      format.json { render json: @topic.errors, status: :unprocessable_entity }
-    end
+    render json: @topic.errors, status: :unprocessable_entity
   end
 
   def topic_params
@@ -103,10 +97,10 @@ class TopicsController < ApplicationController
   end
 
   def push_new_topic topic
-    Pusher.trigger 'channel', 'new_topic', topic, socket_id: params[:socket_id]
+    Pusher.trigger @room.slug, 'new_topic', topic, socket_id: params[:socket_id]
   end
 
   def push_updated_topic topic
-    Pusher.trigger 'channel', 'updated_topic', topic, socket_id: params[:socket_id]
+    Pusher.trigger @room.slug, 'updated_topic', topic, socket_id: params[:socket_id]
   end
 end

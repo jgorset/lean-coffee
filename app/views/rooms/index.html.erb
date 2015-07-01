@@ -1,0 +1,67 @@
+<section class="hero header">
+  <div class="container">
+    <h1>Lean<br>Coffee</h1>
+    <p>
+      Structured agenda-free meetings
+    </p>
+    <footer>
+      <iframe width="200" height="112px" src="https://www.youtube.com/embed/zhG-A-kRPAU" frameborder="0" allowfullscreen></iframe>
+    </footer>
+  </div>
+</section>
+
+<section class="bg-dark">
+  <div class="container">
+    <p>
+      Lean Coffee is an agendaless-yet-structured meeting. Participants gather,
+      build an agenda, and begin talking. Conversations are directed and productive
+      because the agenda for the meeting was democratically generated.
+    </p>
+
+    <p>
+      For best results, try setting a timer for each topic. Start with three
+      minutes. When the timer runs out, everyone votes for whether to discuss it for
+      another three minutes. Votes can be yes, indifferent, or no. If the "nos" and
+      "indifferents" outnumber the "yeses", move onto the next topic.
+    </p>
+  </div>
+</section>
+
+<section class="bg-light" id="room-list">
+  <div class="container">
+    <h2>Start your meeting!</h2>
+
+    <p>
+      Now that you know how it works, go ahead and create a new room, send the link
+      to your teammates, and start talking!
+    </p>
+
+
+    <ul class="grid">
+      <li class="has-hover">
+        <%= link_to new_room_path do %>
+          <i class="fa fa-plus fa-5x grid-box-icon"></i>
+          <h3>New Room</h3>
+        <% end %>
+      </li>
+
+      <% @rooms.each do |room| %>
+        <li class="has-hover">
+          <%= link_to room do %>
+            <i class="fa fa-coffee fa-5x grid-box-icon"></i>
+            <h3><%= room.name %></h3>
+            <p><%= room.description %></p>
+          <% end %>
+          <small class="hover-options" ng-click="$event.stopPropagation()">
+            <%= link_to edit_room_path(room) do %>
+              <i class="fa fa-fw fa-pencil"></i>
+            <% end %>
+            <br>
+            <%= link_to room, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="fa fa-fw fa-trash"></i>
+            <% end %>
+          </small>
+        </li>
+      <% end %>
+  </div>
+</section>

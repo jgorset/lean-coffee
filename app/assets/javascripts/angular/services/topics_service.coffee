@@ -7,7 +7,7 @@ angular.module "lean-coffee"
 
     pusher = $pusher(pusherClient)
 
-    channel = pusher.subscribe 'channel'
+    channel = pusher.subscribe window.location.pathname.replace('/', '')
 
     channel.bind 'new_topic', (topic) =>
       @addTopic new Topic(topic)
@@ -36,10 +36,15 @@ angular.module "lean-coffee"
     @removeVoteFor = (topic) =>
       topic.$remove_vote()
 
+    @archive = (topic) =>
+      topic.$archive()
+
+    @archiveAll = =>
+      Topic.archiveAll()
+
     @move = (topic, lane) =>
       topic.status = lane
       topic.$update()
-
 
     @delete = (topic) =>
       topic.$delete()

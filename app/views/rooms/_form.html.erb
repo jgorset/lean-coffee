@@ -1,0 +1,29 @@
+<%= form_for(@room) do |f| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+      <% @room.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true  %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 2 %>
+  </div>
+  <div class="field">
+    <%= f.label :slug, "URL" %>
+    <%= f.text_field :slug, placeholder: "the part that goes after the /" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

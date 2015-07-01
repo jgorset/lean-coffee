@@ -7,13 +7,17 @@ angular.module "lean-coffee"
         topicsService.create title: @title
         @title = ""
 
-    @update = (topic) =>
-      if topic.title.length
-        topic.$update()
-
     @delete = (topic) =>
       if confirm('Are you sure you want to delete this?')
         topicsService.delete(topic)
+
+    @archive = (topic) =>
+      if confirm('Are you sure you want to archive this?')
+        topicsService.archive(topic)
+
+    @archiveAll = =>
+      if confirm('Are you sure you want to archive all discussed topics?')
+        topicsService.archiveAll()
 
     @times = (n) =>
       new Array(n)

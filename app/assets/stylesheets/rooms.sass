@@ -1,0 +1,153 @@
+.hero
+  background-color: #373a3c
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: right bottom
+  overflow: hidden
+  @media(min-width: 720px)
+    height: 80vh
+    background-attachment: fixed
+  &.header
+    background-image: image-url('header-coffee-large.jpeg')
+
+  h1
+    font-size: 7rem
+    line-height: 4.5rem
+    margin: 0 0 1rem
+    letter-spacing: -1rem
+    @media(min-width: 720px)
+      padding-top: 1vh
+      font-size: 30vh
+      line-height: 19vh
+      margin: 0 0 7vh
+      letter-spacing: -24px
+
+
+  p
+    font-size: 2rem
+    margin: 0 0 1rem
+    text-shadow: 0 0 5px $dark-color
+    @media(min-width: 720px)
+      font-size: 6vh
+      width: 75%
+      float: left
+      margin: 0
+
+  footer
+    @media(min-width: 720px)
+      width: 25%
+      float: right
+
+.container
+  margin: 0 auto
+  padding: 0 15px
+  width: 90%
+  max-width: 800px
+
+.bg-dark, .bg-light
+  font-size: 1.5rem
+  padding: 3rem 0
+
+.bg-dark
+  background-color: $dark-color
+  color: $primary-color
+  a
+    color: $primary-color
+  ul.grid li
+    color: $dark-color
+
+.bg-light
+  background-color: $primary-color
+  color: $light-color
+  a
+    color: $light-color
+  ul.grid li
+    color: $primary-color
+
+#room-list
+  min-height: 100vh
+ul.grid
+  list-style-type: none
+  padding: 0
+  margin: 0 -2% 0 0
+  +display(flex)
+  +flex-flow(row wrap)
+  > li
+    background-color: $light-color
+    font-size: 1rem
+    position: relative
+    +clearfix
+    +display(flex)
+    width: 48%
+    margin: 0 2% 2% 0
+    &.no-link
+      padding: 1rem
+    @media(min-width: 720px)
+      width: 32%
+      margin: 0 1% 1% 0
+    a
+      color: $dark-color
+      text-decoration: none
+    > a
+      padding: 0.5rem
+      width: 100%
+      &:hover, &:focus
+        box-shadow: 2px 7px 40px rgba(0,0,0,0.2)
+      &:active
+        box-shadow: 2px 7px 40px rgba(0,0,0,0.2), 0 0 5px rgba(0,0,0,0.2) inset
+
+    .grid-box-icon
+      float: left
+      margin: -0.5rem
+      margin-right: 0.3rem
+    h3, p
+      margin: 0
+      word-wrap: break-word
+
+// forms
+.field, .actions
+  +clearfix
+  label, input, textarea
+    width: 100%
+    @media(min-width: 720px)
+      float: left
+  label
+    padding-top: 0.8rem
+    @media(min-width: 720px)
+      width: 20%
+  input, textarea
+    font-size: 2.5rem
+    margin-bottom: 2rem
+    border: none
+  input[type="text"], textarea, input[type="search"]
+    background-color: rgba(255,255,255,0.2)
+    background-image: image-url('bg-lines.png')
+    padding: 0.1rem 0.7rem 0.2rem
+    @media(min-width: 720px)
+      width: 80%
+
+.field
+  input[type="submit"]
+    @media(min-width: 720px)
+      width: 20%
+
+.actions
+  padding: 0.5rem 2rem
+  margin: 2rem 0
+  &:hover
+    cursor: pointer
+    box-shadow: 2px 7px 40px rgba(0,0,0,0.2)
+
+.bg-dark
+  .field, .actions
+    input[type="text"], textarea, input[type="search"]
+      color: $primary-color
+    input[type="submit"]
+      background-color: $primary-color
+      color: $dark-color
+
+body > header
+  h1 a
+    text-decoration: none
+    &:hover
+      text-decoration: underline

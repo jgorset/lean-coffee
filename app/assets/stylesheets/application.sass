@@ -9,33 +9,42 @@
 // defined in the other CSS/SCSS files in this directory. It is generally better to create a new
 // file per style scope.
 
+$primary-color: rgba(245, 125, 45, 0.9)
+$light-color: #fff
+$dark-color: #283130
+
 @import "bourbon"
 @import "animate"
 @import "font-awesome-sprockets"
 @import "font-awesome"
 @import "topics"
+@import "rooms"
 @import "mixins/responsive"
 
 *
   box-sizing: border-box
 
 body
-  background: rgba(245, 125, 45, 0.9)
-  color: #fff
+  background: $primary-color
+  color: $light-color
   font-size: 14px
   font-family: "proxima-nova"
   -webkit-font-smoothing: antialiased
+  margin: 0
 
 h1
   font-size: 1.5em
   line-height: 150%
   text-transform: uppercase
-  color: #fff
+  color: $light-color
   margin: 0 0 1em 0
 
 p
   font-size: 1em
   line-height: 150%
+  margin: 0 0 1.5em
+  &:last-child
+    margin-bottom: 0
 
 .wf-loading h1,
 .wf-loading h2,
@@ -48,3 +57,87 @@ p
 .wf-active h3,
 .wf-active p
   visibility: visible
+
+.hover-options
+  position: absolute
+  top: 2px
+  right: -1px
+  display: none
+  text-align: right
+  z-index: 1000
+
+.has-hover
+  &:hover, &:focus
+    > .hover-options
+      display: block
+
+body > footer
+  @media(min-width: 768px)
+    +align-items(stretch)
+    +display(flex)
+    +flex-direction(row)
+    +justify-content(flex-start)
+    &.bg-dark
+      padding: 0
+
+  h1.brand
+    font-size: 7rem
+    line-height: 4.5rem
+    letter-spacing: -1rem
+    margin: 3rem 0
+    @media(min-width: 768px)
+      +flex(1)
+      font-size: 6vw
+      letter-spacing: -0.7vw
+      line-height: 3.9vw
+    a
+      color: $light-color
+      text-decoration: none
+
+  nav
+    @media(min-width: 768px)
+      +flex(4)
+      position: relative
+    ul
+      list-style-type: none
+      padding: 0
+      @media(min-width: 768px)
+        +align-items(stretch)
+        +display(flex)
+        +flex-direction(row)
+        +justify-content(flex-start)
+        position: absolute
+        height: 100%
+        width: 100%
+        margin: 0
+        margin-left: -1em
+        padding: 1em 0
+      li
+        @media(min-width: 768px)
+          +flex(1)
+          position: relative
+          max-width: 20%
+          text-align: center
+          margin-left: 1em
+        display: block
+        a
+          text-decoration: none
+          display: block
+          border: 1px dashed $primary-color
+          &:hover, &:focus
+            div
+              text-decoration: underline
+          &:active
+            border-style: solid
+          div
+            @media(min-width: 768px)
+              display: table // vertical alignment is insane
+              width: 100%
+          &, & div
+            @media(min-width: 768px)
+              position: absolute
+              top: 0
+              bottom: 0
+              left: 0
+              right: 0
+              margin: auto

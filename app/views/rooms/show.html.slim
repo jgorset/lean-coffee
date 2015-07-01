@@ -1,14 +1,12 @@
 div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
-
-
   div[
     ng-controller="LaneCtrl as laneCtrl"
     ]
     div [
         ng-repeat="(lane_index,lane) in laneCtrl.lanes"
         ]
-      div[
-        class="{{lane | lowercase | hyphens}} lane"
+      .lane.has-hover[
+        class="{{lane | lowercase | hyphens}}"
         data-lane="{{lane | lowercase | underscores}}"
         ng-model="service.topics"
         data-drop="true"
@@ -16,20 +14,21 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
         ]
         h1 ng-bind="lane"
 
-        i class="sort fa fa-sort-amount-desc" ng-click="service.sort()"
+        small.hover-options
+          i class="fa fa-fw fa-archive" ng-click="topicsCtrl.archiveAll()" ng-if="(lane | lowercase | underscores) === 'talked_about'"
+          i class="fa fa-fw fa-sort-amount-desc" ng-click="service.sort()"
 
         form ng-submit="topicsCtrl.create()" ng-if="$first"
           input ng-model="topicsCtrl.title" class="new-topic" type="text"
 
         ul class="topics"
-          li[
+          li.topic.has-hover[
             ng-controller="TopicCtrl as topicCtrl"
-            ng-repeat="topic in service.topics | filter:(lane | lowercase | underscores)"
+            ng-repeat="topic in service.topics | filter:(lane | lowercase | underscores) | filter:false:topic.archived"
             data-drag="true"
             data-jqyoui-options="{revert: 'invalid'}"
             ng-model="service.topics"
             data-jqyoui-draggable="{index: {{$index}}, animate: true, onStop: 'topicStoppedDraggingCallback'}"
-            class="topic"
             ]
             small class="hover-options" ng-click="$event.stopPropagation()"
               i[
@@ -42,16 +41,43 @@ div ng-controller="TopicsCtrl as topicsCtrl" class="animated fadeIn lanes"
                 ]
               i[
                 ng-class="{'fa-times' : topicCtrl.edit_topic, 'fa-pencil' : !topicCtrl.edit_topic}"
-                class="fa fa-fw" 
+                class="fa fa-fw"
                 ng-click="topicCtrl.edit()"
                 ]
+              br
+              span ng-if="(lane | lowercase | underscores) === 'talked_about'"
+                i[
+                  class="fa fa-archive fa-fw"
+                  ng-click="topicsCtrl.archive(topic)"
+                ]
+                br
               i[
                 class="fa fa-trash fa-fw"
                 ng-click="topicsCtrl.delete(topic)"
                 ]
             p ng-bind="topic.title" ng-class="{'hidden' : topicCtrl.edit_topic}"
-            form ng-submit="topicsCtrl.update(topic); topicCtrl.edit_topic = false" ng-class="{'visible' : topicCtrl.edit_topic}" class="edit-topic"  ng-click="$event.stopPropagation()"
+            form.edit-topic ng-submit="topicCtrl.update()" ng-class="{'visible' : topicCtrl.edit_topic}" ng-click="$event.stopPropagation()"
               input ng-model="topic.title" class="edit-topic" type="text" ng-class="{'visible' : topicCtrl.edit_topic}"
 
             ul class="votes"
               li class="vote" ng-bind-html="topic.votes | toRoman"
+
+footer.bg-dark
+  h1.brand
+    a href="/"
+      | Lean
+      br
+      | Coffee
+
+  nav
+    ul
+      li
+        a href='/#room-list'
+          div Room List
+      li
+        a href=edit_room_path(@room)
+          div Edit Room Details
+
+      li
+        a href=archives_room_path(@room)
+          div Archives
